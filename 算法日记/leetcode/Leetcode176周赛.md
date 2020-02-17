@@ -1,5 +1,138 @@
 # [LeetCode周赛176](<https://leetcode-cn.com/contest/weekly-contest-176>)
 
+[TOC]
+
+
+
+### [A统计有限矩阵的负数](<https://leetcode-cn.com/problems/count-negative-numbers-in-a-sorted-matrix/>)
+
+给你一个 m * n 的矩阵 grid，矩阵中的元素无论是按行还是按列，都以非递增顺序排列。 
+
+请你统计并返回 grid 中 负数 的数目。
+
+ ##### 样例
+
+示例 1：
+
+输入：grid = [[4,3,2,-1],[3,2,1,-1],[1,1,-1,-2],[-1,-1,-2,-3]]
+输出：8
+解释：矩阵中共有 8 个负数。
+示例 2：
+
+输入：grid = [[3,2],[1,0]]
+输出：0
+示例 3：
+
+输入：grid = [[1,-1],[-1,-1]]
+输出：3
+示例 4：
+
+输入：grid = [[-1]]
+输出：1
+
+##### 解析
+
+直接就暴力枚举，然后获取到值
+
+##### 代码
+
+```
+
+
+public class Main {
+    public static int countNegatives(int[][] grid) {
+        int res = 0;
+        for(int i =0;i<grid.length;i++){
+            for(int j =0;j<grid[i].length;j++){
+                if(grid[i][j] < 0){
+                    res++;
+                }
+            }
+        }
+        return res;
+    }
+    public static void main(String[] args) {
+//        int[][] arr ={{4,3,2,-1},{3,2,1,-1},{1,1,-1,-2},{-1,-1,-2,-3}};
+        int[][] arr ={{3,2},{1,0}};
+        System.out.println(countNegatives(arr));
+
+    }
+}
+
+```
+
+### [B:最后k个数的乘积](<https://leetcode-cn.com/problems/product-of-the-last-k-numbers/>)
+
+请你实现一个「数字乘积类」ProductOfNumbers，要求支持下述两种方法：
+
+1. add(int num)
+
+将数字 num 添加到当前数字列表的最后面。
+2. getProduct(int k)
+
+返回当前数字列表中，最后 k 个数字的乘积。
+你可以假设当前列表中始终 至少 包含 k 个数字。
+题目数据保证：任何时候，任一连续数字序列的乘积都在 32-bit 整数范围内，不会溢出。
+
+##### 样例
+
+```
+输入：
+["ProductOfNumbers","add","add","add","add","add","getProduct","getProduct","getProduct","add","getProduct"]
+[[],[3],[0],[2],[5],[4],[2],[3],[4],[8],[2]]
+
+输出：
+[null,null,null,null,null,null,20,40,0,null,32]
+
+解释：
+ProductOfNumbers productOfNumbers = new ProductOfNumbers();
+productOfNumbers.add(3);        // [3]
+productOfNumbers.add(0);        // [3,0]
+productOfNumbers.add(2);        // [3,0,2]
+productOfNumbers.add(5);        // [3,0,2,5]
+productOfNumbers.add(4);        // [3,0,2,5,4]
+productOfNumbers.getProduct(2); // 返回 20 。最后 2 个数字的乘积是 5 * 4 = 20
+productOfNumbers.getProduct(3); // 返回 40 。最后 3 个数字的乘积是 2 * 5 * 4 = 40
+productOfNumbers.getProduct(4); // 返回  0 。最后 4 个数字的乘积是 0 * 2 * 5 * 4 = 0
+productOfNumbers.add(8);        // [3,0,2,5,4,8]
+productOfNumbers.getProduct(2); // 返回 32 。最后 2 个数字的乘积是 4 * 8 = 32 
+
+
+```
+
+
+
+##### 解析
+
+> 这个题型我也是第一次见，所以记下来玩玩，写出框架然后让自己填空，有点意思哈,思想很简单，暴力枚举就可以过了
+
+##### 代码：
+
+```java
+class ProductOfNumbers {
+    private List<Integer> arrList = new ArrayList<Integer>();
+
+    public ProductOfNumbers() {
+        
+    }
+    
+    public void add(int num) {
+        arrList.add(num);
+    }
+    
+    public int getProduct(int k) {
+        int res = 1;
+        int m = arrList.size();
+        for(int i =1;i<=k;i++){
+            res = res * arrList.get(m-i);
+        }
+        return res;
+    }
+}
+```
+
+
+
 ### [C:最多可以参加的会议节目](<https://leetcode-cn.com/problems/maximum-number-of-events-that-can-be-attended/>)
 
 ##### 题目描述
